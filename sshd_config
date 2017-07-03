@@ -1,0 +1,27 @@
+# Use host keys in /ssh directory
+HostKey /ssh/ssh_host_rsa_key
+HostKey /ssh/ssh_host_dsa_key
+HostKey /ssh/ssh_host_ecdsa_key
+HostKey /ssh/ssh_host_ed25519_key
+
+# Only authorize against public keys in /ssh/authorized_keys
+AuthorizedKeysFile /ssh/authorized_keys
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+
+# Only allow user "sftp"
+PermitRootLogin no
+AllowUsers sftp
+AllowGroups sftp
+
+# Disable unused features
+AllowAgentForwarding no
+AllowTcpForwarding no
+X11Forwarding no
+PermitTTY no
+PermitTunnel no
+
+# sftp chroot in /srv
+ChrootDirectory /srv
+Subsystem sftp /usr/lib/ssh/sftp-server
+ForceCommand internal-sftp
